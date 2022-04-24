@@ -4,7 +4,7 @@ import os
 from setuptools import setup
 # from scriptforge_stubs import __version__
 PKG_NAME = 'types-access2base'
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
