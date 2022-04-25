@@ -41,6 +41,7 @@ import time
 
 XSCRIPTCONTEXT: uno
 
+
 class _Singleton(type):
     """
     A Singleton design pattern
@@ -458,7 +459,7 @@ THISDATABASEDOCUMENT: OfficeDatabaseDocument
 
 
 def _ErrorHandler(
-        type: Type[Any], value: BaseException, tb: TracebackType | None = ...
+        type: Type[Any], value: BaseException, tb: Union[TracebackType, None] = ...
 ) -> None:
     """
     Is the function to be set as new sys.excepthook to bypass the standard error handler
@@ -519,7 +520,7 @@ class _A2B(object, metaclass=_Singleton):
         """
 
     @classmethod
-    def invokeMethod(cls, script: str, module: str, *args: Any) -> Any | None:
+    def invokeMethod(cls, script: str, module: str, *args: Any) -> Union[Any, None]:
         """
         Direct call to a named script/module pair with their arguments
         If the arguments do not match their definition at the Basic side, a TypeError is raised
@@ -780,7 +781,7 @@ class Application(object, metaclass=_Singleton):
         """
 
     @classmethod
-    def CurrentDb(cls) -> _Database | None:
+    def CurrentDb(cls) -> Union[_Database, None]:
         """
         Gets the database object related to a Base (".odb") document.
 
@@ -806,11 +807,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DAvg(cls, expression: str, domain: str) -> float | None: ...
-
+    def DAvg(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DAvg(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DAvg(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the average of a set of values in a specified set of records (a domain).
 
@@ -829,7 +829,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: The average of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DAvg <http://www.access2base.com/access2base.html#DAvg>`_
@@ -837,11 +837,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DCount(cls, expression: str, domain: str) -> int | None: ...
-
+    def DCount(cls, expression: str, domain: str) -> Union[int, None]: ...
     @overload
     @classmethod
-    def DCount(cls, expression: str, domain: str, criteria: str) -> int | None:
+    def DCount(cls, expression: str, domain: str, criteria: str) -> Union[int, None]:
         """
         Gets the number of records that are in a specified set of records (a domain).
 
@@ -860,10 +859,10 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             int | None: the number of records that are in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
-            `DCound <http://www.access2base.com/access2base.html#DCount>`_
+            `DCount <http://www.access2base.com/access2base.html#DCount>`_
         """
 
     @classmethod
@@ -903,11 +902,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DMax(cls, expression: str, domain: str) -> float | None: ...
-
+    def DMax(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DMax(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DMax(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the maximum value of a set of values in a specified set of records (a domain).
 
@@ -926,7 +924,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: the maximum value of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DMax <http://www.access2base.com/access2base.html#%5B%5BDMin%2C%20DMax%5D%5D>`_
@@ -934,11 +932,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DMin(cls, expression: str, domain: str) -> float | None: ...
-
+    def DMin(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DMin(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DMin(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the minimum value of a set of values in a specified set of records (a domain).
 
@@ -957,7 +954,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: the minimum value of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DMin <http://www.access2base.com/access2base.html#%5B%5BDMin%2C%20DMax%5D%5D>`_
@@ -965,11 +962,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DStDev(cls, expression: str, domain: str) -> float | None: ...
-
+    def DStDev(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DStDev(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DStDev(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the standard deviation of a set of values in a specified set of records (a domain).
 
@@ -988,7 +984,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: The standard deviation of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DStDev <http://www.access2base.com/access2base.html#%5B%5BDStDev%2C%20DStDevP%5D%5D>`_
@@ -996,11 +992,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DStDevP(cls, expression: str, domain: str) -> float | None: ...
-
+    def DStDevP(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DStDevP(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DStDevP(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the standard deviation of a set of values in a specified set of records (a domain).
 
@@ -1019,7 +1014,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: The standard deviation of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DStDevP <http://www.access2base.com/access2base.html#%5B%5BDStDev%2C%20DStDevP%5D%5D>`_
@@ -1027,11 +1022,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DSum(cls, expression: str, domain: str) -> float | None: ...
-
+    def DSum(cls, expression: str, domain: str) -> Union[float, None]: ...
     @overload
     @classmethod
-    def DSum(cls, expression: str, domain: str, criteria: str) -> float | None:
+    def DSum(cls, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the sum of a set of numeric values in a specified set of records (a domain).
 
@@ -1050,7 +1044,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             float | None: The sum of a set of numeric values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DSum <http://www.access2base.com/access2base.html#DSum>`_
@@ -1058,11 +1052,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DVar(cls, expression: str, domain: str) -> Any | None: ...
-
+    def DVar(cls, expression: str, domain: str) -> Union[Any, None]: ...
     @overload
     @classmethod
-    def DVar(cls, expression: str, domain: str, criteria: str) -> Any | None:
+    def DVar(cls, expression: str, domain: str, criteria: str) -> Union[Any, None]:
         """
         Gets the variance of a set of values in a specified set of records (a domain).
 
@@ -1081,7 +1074,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             Any | None: the variance of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DVar <http://www.access2base.com/access2base.html#%5B%5BDVar%2C%20DVarP%5D%5D>`_
@@ -1089,11 +1082,10 @@ class Application(object, metaclass=_Singleton):
 
     @overload
     @classmethod
-    def DVarP(cls, expression: str, domain: str) -> Any | None: ...
-
+    def DVarP(cls, expression: str, domain: str) -> Union[Any, None]: ...
     @overload
     @classmethod
-    def DVarP(cls, expression: str, domain: str, criteria: str) -> Any | None:
+    def DVarP(cls, expression: str, domain: str, criteria: str) -> Union[Any, None]:
         """
         Gets the variance of a set of values in a specified set of records (a domain).
 
@@ -1112,14 +1104,14 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             Any | None: the variance of a set of values in a specified set of records (a domain).
-                If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+                If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DVarP <http://www.access2base.com/access2base.html#%5B%5BDVar%2C%20DVarP%5D%5D>`_
         """
 
     @classmethod
-    def Events(cls, event: Any) -> _Event | None:
+    def Events(cls, event: Any) -> Union[_Event, None]:
         """
         Gets the (unique) instance of the currently executed event object.
 
@@ -1129,7 +1121,7 @@ class Application(object, metaclass=_Singleton):
 
         Returns:
             _Event | None: the (unique) instance of the currently executed event object.
-                Returns ``None`` when the event is not really an event or it was triggered by an unsupported event
+                Returns None when the event is not really an event or it was triggered by an unsupported event
                 type - or some other error occurred (the call to Events() never stops the execution of the macro).
                 In particular, when the event has been triggered by a toolbar button;
         """
@@ -1557,12 +1549,12 @@ class DoCmd(object, metaclass=_Singleton):
     @classmethod
     def FindRecord(
             cls,
-            findwhat: str | datetime.datetime | Number,
+            findwhat: Union[str, datetime.datetime, Number],
             match: int = ...,
             matchcase: bool = ...,
             search: int = ...,
             searchasformatted: bool = ...,
-            onlycurrentfield: int | str = ...,
+            onlycurrentfield: Union[int, str] = ...,
             findfirst: bool = ...,
     ) -> bool:
         """
@@ -2027,7 +2019,7 @@ class DoCmd(object, metaclass=_Singleton):
         """
 
     @classmethod
-    def RunCommand(cls, command: str | int) -> bool:
+    def RunCommand(cls, command: Union[str, int]) -> bool:
         """
         Executes the command given as argument.
 
@@ -2077,7 +2069,7 @@ class DoCmd(object, metaclass=_Singleton):
 
         Args:
             objecttype (int): The type of object to set the focus on.
- 
+
             objectname (str, optional): The name of the object to set the focus on. This argument is NOT case-sensitive.
                 The argument is mandatory when the objecttype argument is one of next values:
                 acTable, acQuery, acForm, acReport or acDocument.
@@ -2326,6 +2318,7 @@ class Basic(object, metaclass=_Singleton):
         Returns:
             datetime.datetime: A datetime.datetime value.
         """
+
     @classmethod
     def DateDiff(
             cls,
@@ -2410,7 +2403,6 @@ class Basic(object, metaclass=_Singleton):
         Returns:
             int: The extracted part for the given date/time.
         """
-
 
     @classmethod
     def DateValue(cls, datestring: str) -> datetime.datetime:
@@ -2606,7 +2598,7 @@ class _BasicObject(object):
 
     def __repr__(self) -> str: ...
 
-    def _Reset(self, propertyname: str, basicreturn: int | Any = ...) -> Any:
+    def _Reset(self, propertyname: str, basicreturn: Union[int, Any] = ...) -> Any:
         """force new value or erase properties from dictionary (done to optimize calls to Basic scripts)"""
 
     @property
@@ -2617,7 +2609,7 @@ class _BasicObject(object):
 
     def Dispose(self) -> Any: ...
 
-    def getProperty(self, propertyname: str, index: int | str = ...) -> Any: ...
+    def getProperty(self, propertyname: str, index: Union[int, str] = ...) -> Any: ...
 
     GetProperty = getProperty
 
@@ -2625,10 +2617,10 @@ class _BasicObject(object):
 
     HasProperty = hasProperty
 
-    def Properties(self, index: int | str = ...) -> Any: ...
+    def Properties(self, index: Union[int, str] = ...) -> Any: ...
 
     def setProperty(
-            self, propertyname: str, value: Any, index: int | str = ...
+            self, propertyname: str, value: Any, index: Union[int, str] = ...
     ) -> None: ...
 
     SetProperty = setProperty
@@ -2645,7 +2637,7 @@ class _Collection(_BasicObject):
 
     def __len__(self) -> int: ...
 
-    def Add(self, table: _BasicObject | Any, value: Any = ...) -> bool: ...
+    def Add(self, table: _BasicObject, value: Any = ...) -> bool: ...
 
     def Delete(self, name: str) -> bool: ...
 
@@ -2674,7 +2666,7 @@ class _CommandBar(_BasicObject):
         """Return a Collection type"""
 
     @overload
-    def CommandBarControls(self, index: int | str) -> _CommandBarControl:
+    def CommandBarControls(self, index: Union[int, str]) -> _CommandBarControl:
         """Return an object of type CommandBarControl indicated by its index"""
 
     def Reset(self) -> bool:
@@ -3161,6 +3153,7 @@ class _Control(_BasicObject):
         """
         Gets/Sets how a CheckBox wll display Null values.
         """
+
     @property
     def Value(self) -> Any:
         """
@@ -3428,10 +3421,9 @@ class _Database(_BasicObject):
         """
 
     @overload
-    def DAvg(self, expression: str, domain: str) -> float | None: ...
-
+    def DAvg(self, expression: str, domain: str) -> Union[float, None]: ...
     @overload
-    def DAvg(self, expression: str, domain: str, criteria: str) -> float | None:
+    def DAvg(self, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
         Gets the average of a set of values in a specified set of records (a domain).
 
@@ -3457,10 +3449,10 @@ class _Database(_BasicObject):
         """
 
     @overload
-    def DCount(self, expression: str, domain: str) -> int | None: ...
+    def DCount(self, expression: str, domain: str) -> Union[int, None]: ...
 
     @overload
-    def DCount(self, expression: str, domain: str, criteria: str) -> int | None:
+    def DCount(self, expression: str, domain: str, criteria: str) -> Union[int, None]:
         """
         Gets the number of records that are in a specified set of records (a domain).
 
@@ -3479,7 +3471,7 @@ class _Database(_BasicObject):
 
         Returns:
             int | None: the number of records that are in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DCount <http://www.access2base.com/access2base.html#DCount>`_
@@ -3521,6 +3513,7 @@ class _Database(_BasicObject):
 
     @overload
     def DMax(self, expression: str, domain: str) -> Union[float, None]: ...
+
     @overload
     def DMax(self, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
@@ -3541,7 +3534,7 @@ class _Database(_BasicObject):
 
         Returns:
             float | None: the maximum value of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DMax <http://www.access2base.com/access2base.html#%5B%5BDMin%2C%20DMax%5D%5D>`_
@@ -3549,6 +3542,7 @@ class _Database(_BasicObject):
 
     @overload
     def DMin(self, expression: str, domain: str) -> Union[float, None]: ...
+
     @overload
     def DMin(self, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
@@ -3569,7 +3563,7 @@ class _Database(_BasicObject):
 
         Returns:
             float | None: the minimum value of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DMin <http://www.access2base.com/access2base.html#%5B%5BDMin%2C%20DMax%5D%5D>`_
@@ -3577,6 +3571,7 @@ class _Database(_BasicObject):
 
     @overload
     def DStDev(self, expression: str, domain: str) -> Union[float, None]: ...
+
     @overload
     def DStDev(self, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
@@ -3597,7 +3592,7 @@ class _Database(_BasicObject):
 
         Returns:
             float | None: The standard deviation of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DStDev <http://www.access2base.com/access2base.html#%5B%5BDStDev%2C%20DStDevP%5D%5D>`_
@@ -3605,6 +3600,7 @@ class _Database(_BasicObject):
 
     @overload
     def DStDevP(self, expression: str, domain: str) -> Union[float, None]: ...
+
     @overload
     def DStDevP(self, expression: str, domain: str, criteria: str) -> Union[float, None]:
         """
@@ -3625,14 +3621,15 @@ class _Database(_BasicObject):
 
         Returns:
             float | None: The standard deviation of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DStDevP <http://www.access2base.com/access2base.html#%5B%5BDStDev%2C%20DStDevP%5D%5D>`_
         """
 
     @overload
-    def DVar(self, expression: str, domain: str) -> Any | None: ...
+    def DVar(self, expression: str, domain: str) -> Union[Any, None]: ...
+
     @overload
     def DVar(self, expression: str, domain: str, criteria: str) -> Union[Any, None]:
         """
@@ -3653,7 +3650,7 @@ class _Database(_BasicObject):
 
         Returns:
             Any | None: the variance of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DVar <http://www.access2base.com/access2base.html#%5B%5BDVar%2C%20DVarP%5D%5D>`_
@@ -3661,6 +3658,7 @@ class _Database(_BasicObject):
 
     @overload
     def DVarP(self, expression: str, domain: str) -> Union[Any, None]: ...
+
     @overload
     def DVarP(self, expression: str, domain: str, criteria: str) -> Union[Any, None]:
         """
@@ -3681,7 +3679,7 @@ class _Database(_BasicObject):
 
         Returns:
             Any | None: the variance of a set of values in a specified set of records (a domain).
-            If no record satisfies criteria or if domain contains no records then ``None`` is returned.
+            If no record satisfies criteria or if domain contains no records then None is returned.
 
         See Also:
             `DVarP <http://www.access2base.com/access2base.html#%5B%5BDVar%2C%20DVarP%5D%5D>`_
@@ -3711,6 +3709,7 @@ class _Database(_BasicObject):
 
     @overload
     def OpenSQL(self, SQL: str) -> bool: ...
+
     @overload
     def OpenSQL(self, SQL: str, option: int) -> bool:
         """
@@ -4111,7 +4110,7 @@ class _Dialog(_BasicObject):
             groupname (str): The name of the group = the name of its first element
 
         Returns:
-            _OptionGroup | None: Option Group if found; Otherwise, ``None``.
+            _OptionGroup | None: Option Group if found; Otherwise, None.
         """
 
     def Start(self) -> bool:
@@ -4301,7 +4300,7 @@ class _Event(_BasicObject):
         Gets the mouse cursors Y coordinate.
 
         Returns:
-            int | None: Y coordinate or ``None``.
+            int | None: Y coordinate or None.
         """
     # endregion Properties
 
@@ -4786,6 +4785,7 @@ class _Form(_BasicObject):
 
     @overload
     def Controls(self) -> _Collection: ...
+
     @overload
     def Controls(self, index: Union[str, int]) -> _Control: ...
 
@@ -4875,7 +4875,7 @@ class _Module(_BasicObject):
     @property
     def Type(self) -> int:
         """
-        Gets the type of a query, a commandbarcontrol or a Basic module|Module].
+        Gets the type of a query, a commandbarcontrol or a Basic module.
 
         Returns a const value from acConstants.
 
@@ -5553,7 +5553,6 @@ class _SubForm(_Form):
             `LinkMasterFields <http://www.access2base.com/access2base.html#LinkMasterFields>`_
         """
     # endregion Properties
-
 
 
 class _TableDef(_BasicObject):
